@@ -1,6 +1,6 @@
 export const site = {
   name: 'crookies',
-  url: 'https://crookies.com',
+  url: 'https://crookies.graypuma145.workers.dev',
   tagline: 'Digital assets for short-form editors',
   description:
     'MOGRTs, templates and business kits for short-form video editors and creators. Instant download, secure checkout by Payhip.',

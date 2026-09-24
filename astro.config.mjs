@@ -10,7 +10,7 @@ import keystatic from '@keystatic/astro';
 const isDev = process.argv.includes('dev');
 
 export default defineConfig({
-  site: 'https://crookies.com',
+  site: 'https://crookies.graypuma145.workers.dev',
   output: 'static',
   // Sessions are unused; leaving them on makes the adapter require a KV namespace.
   session: false,

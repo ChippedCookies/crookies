@@ -15,10 +15,12 @@ const GITHUB_REPO = 'crookies';
 // Keystatic applies the pattern even when the field is empty, so an empty link has to match too.
 const payhipUrlOrEmpty = new RegExp(`^$|${PAYHIP_URL_PATTERN.source}`);
 
+// Dev edits local files. PUBLIC_KEYSTATIC_STORAGE=github switches dev to GitHub mode, which Keystatic
+// needs for its one-time "create GitHub App" setup (that setup only runs in dev).
+const useGitHub = import.meta.env.PROD || import.meta.env.PUBLIC_KEYSTATIC_STORAGE === 'github';
+
 export default config({
-  storage: import.meta.env.PROD
-    ? { kind: 'github', repo: { owner: GITHUB_OWNER, name: GITHUB_REPO } }
-    : { kind: 'local' },
+  storage: useGitHub ? { kind: 'github', repo: { owner: GITHUB_OWNER, name: GITHUB_REPO } } : { kind: 'local' },
   ui: {
     brand: { name: 'crookies' },
   },

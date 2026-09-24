@@ -34,9 +34,14 @@ You only do this once.
 3. **Deploy to Cloudflare.** In the Cloudflare dashboard, go to **Workers & Pages → Create → Import a repository** and pick the repository. Use:
    - Build command: `npm run build`
    - Deploy command: `npx wrangler deploy`
-4. **Connect the admin panel to GitHub.** Open `https://<your-site>/keystatic` and follow Keystatic's prompts to create a GitHub App. When it's done, it gives you four values: `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`.
-   - Add them in Cloudflare as **Settings → Variables and Secrets** for the Worker, then redeploy.
-   - For local use, put them in `.env.local` (never commit this file).
+4. **Connect the admin panel to GitHub.** Keystatic's app-creation setup only runs on your computer:
+   - Run `PUBLIC_KEYSTATIC_STORAGE=github npm run dev` and open `http://127.0.0.1:4321/keystatic/setup`.
+   - Enter your live site URL as **Deployed App URL**, click **Create GitHub App**, finish on GitHub, and install the app on the repository.
+   - Keystatic writes four values to `.env`. Rename that file to `.env.local`, and never commit it.
+   - In Cloudflare, open the Worker's **Settings**:
+     - Under **Variables and Secrets**, add `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET` and `KEYSTATIC_SECRET` as **Secrets**.
+     - Under **Build → Variables and secrets**, add `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. It must be a build variable because it's baked in at build time.
+     - Redeploy.
 5. **Turn on build-failure emails.** In Cloudflare, go to **Notifications** so you hear about a failed update.
 6. **Fill in the site settings** in `src/site.ts`:
    - `url`: your real domain

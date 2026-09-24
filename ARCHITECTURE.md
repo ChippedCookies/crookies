@@ -159,8 +159,9 @@ The logic itself lives in **`src/lib/catalog.ts`**, which doesn't depend on Astr
 
 **Setup**
 - **Storage:** GitHub mode. `storage: { kind: 'github', repo: { owner, name } }` in `keystatic.config.ts`.
-- **Login:** GitHub, through a Keystatic GitHub App that is created during first-time setup at `/keystatic`. Only GitHub accounts with write access to the repo can edit.
-- **Secrets:** `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. They go in `.env.local` locally and as Cloudflare Worker secrets in production (dashboard or `wrangler secret put`). They are never committed.
+- **Login:** GitHub, through a Keystatic GitHub App. Only GitHub accounts with write access to the repo can edit.
+- **Creating the GitHub App (one-time):** Keystatic only runs its app-creation flow in dev, and it writes the results to `.env`. Run `PUBLIC_KEYSTATIC_STORAGE=github npm run dev`, then open `/keystatic/setup` and enter the deployed URL so it's registered as an OAuth callback.
+- **Secrets:** `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET` and `KEYSTATIC_SECRET` are read at runtime through `astro:env/server`'s `getSecret`, so in production they are Cloudflare Worker secrets. `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` is inlined into the admin UI at build time, so it is a Cloudflare **build variable**. Locally, all four live in `.env.local`. None of them are ever committed.
 - **Runtime:** `/keystatic` and `/api/keystatic/*` run on demand in a Cloudflare Worker through `@astrojs/cloudflare`. Every other page is prerendered and served as static assets. This setup was tested on 2026-09-24 in Cloudflare's local runtime: the admin UI loads, the GitHub login redirects correctly, and the OAuth callback reaches GitHub.
 - **Local editing:** with `npm run dev`, `/keystatic` edits files on disk directly, with no login and no commit. Storage switches on `import.meta.env.PROD`: local in dev, GitHub in builds.
 - **Dev runs without the Cloudflare adapter.** `astro.config.mjs` only adds the adapter for builds. In dev the adapter would run server code inside workerd, where Keystatic's local mode can't write to disk (it fails with `exports is not defined`). Builds and production use the adapter as normal.

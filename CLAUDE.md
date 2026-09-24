@@ -222,7 +222,7 @@ Rules for creating new abstractions:
 
 DO NOT change without explicit instruction:
 
-* Anything outside this repo (`/Users/bj/onlinestore`). No editing global config, dotfiles, or files in other projects or directories.
+* Anything outside this repo (`/Users/bj/Documents/onlinestore`). No editing global config, dotfiles, or files in other projects or directories.
 * `.env.local` and any other file holding secrets or API keys. Read from them if needed; never overwrite or regenerate them.
 * Real Payhip links and prices in `src/content/products/`. Don't change or remove them unless asked, because a wrong link sends buyers to the wrong product. Product files are the owner's content, so don't rewrite their copy unprompted.
 * The `storage` settings in `keystatic.config.ts` (repo owner and name). Changing them disconnects the admin panel.
@@ -248,4 +248,4 @@ This is a single **npm + Astro** project. Never guess a command (no `pnpm ...`, 
 
 A task is not complete until typecheck, lint, build and the relevant test command all pass. See Testing and Quality above.
 
-API keys are stored in `.env.local`. This includes Keystatic's GitHub App credentials: `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. Keystatic's setup writes them to `.env`, so move them to `.env.local`. The same variables must also be set as Cloudflare Worker secrets. Wrangler's local runtime reads them from `.dev.vars`, which is gitignored like `.env.local`.
+API keys are stored in `.env.local`. This includes Keystatic's GitHub App credentials: `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET` and `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG`. Keystatic's setup writes them to `.env`, so move them to `.env.local`. In Cloudflare, the first three are Worker secrets (read at runtime through `astro:env`). `PUBLIC_KEYSTATIC_GITHUB_APP_SLUG` is inlined when the site is built, so it must be a **build variable** instead. Wrangler's local runtime reads them from `.dev.vars`, which is gitignored like `.env.local`.
