@@ -1,0 +1,19 @@
+# build output
+dist/
+.astro/
+.wrangler/
+
+# dependencies
+node_modules/
+
+# secrets
+.env
+.env.*
+.dev.vars
+
+# tests
+test-results/
+playwright-report/
+
+# os / editor
+.DS_Store

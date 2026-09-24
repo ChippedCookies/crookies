@@ -1,0 +1,88 @@
+---
+import { site } from '../site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container inner">
+    <div>
+      <p class="wordmark">{site.name}</p>
+      <p class="muted">{site.tagline}. Checkout and downloads by Payhip.</p>
+    </div>
+    <nav aria-label="Footer">
+      <ul class="links" role="list">
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#waitlist">AI waitlist</a></li>
+      </ul>
+    </nav>
+    <p class="legal">
+      Contract and invoice products are templates only, not legal advice. Have a lawyer review contracts before you use
+      them.
+    </p>
+    <p class="muted copyright">© {year} {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-block: var(--space-16) var(--space-8);
+    border-top: var(--hairline) solid var(--border);
+    font-size: var(--text-sm);
+  }
+
+  .inner {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 768px) {
+    .inner {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  .wordmark {
+    margin-bottom: var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    font-weight: 800;
+    letter-spacing: var(--tracking-tight);
+  }
+
+  .muted {
+    color: var(--muted);
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-6);
+    padding: 0;
+    list-style: none;
+  }
+
+  .links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .links a:hover {
+    color: var(--text);
+  }
+
+  .legal,
+  .copyright {
+    grid-column: 1 / -1;
+  }
+
+  .legal {
+    max-width: 70ch;
+    color: var(--muted);
+  }
+</style>

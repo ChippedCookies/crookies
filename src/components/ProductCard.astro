@@ -1,0 +1,206 @@
+---
+import type { Product } from '../lib/products';
+import { BADGE_LABELS, CATEGORY_LABELS, FORMAT_LABELS } from '../lib/product-schema';
+import BuyButton from './BuyButton.astro';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const videoType = product.previewVideo?.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+---
+
+<article class="card">
+  <div class="media">
+    <img src={product.previewImage} alt={product.previewAlt} width="1200" height="900" loading="lazy" decoding="async" />
+    {
+      product.previewVideo && (
+        <video data-preview-video muted playsinline loop preload="none" poster={product.previewImage} aria-hidden="true">
+          <source src={product.previewVideo} type={videoType} />
+        </video>
+      )
+    }
+    {product.badge !== 'none' && <span class="badge">{BADGE_LABELS[product.badge]}</span>}
+  </div>
+
+  <div class="body">
+    <p class="category">{CATEGORY_LABELS[product.category]}</p>
+    <h3 class="name">{product.name}</h3>
+    <p class="tagline">{product.tagline}</p>
+    <ul class="bullets" role="list">
+      {product.bullets.map((bullet) => <li>{bullet}</li>)}
+    </ul>
+    {
+      product.formats.length > 0 && (
+        <ul class="formats" role="list" aria-label="Works with">
+          {product.formats.map((format) => <li>{FORMAT_LABELS[format]}</li>)}
+        </ul>
+      )
+    }
+    {
+      product.legalDisclaimer && (
+        <p class="legal">Templates only, not legal advice. Have a lawyer review contracts before you use them.</p>
+      )
+    }
+  </div>
+
+  <div class="footer">
+    <BuyButton product={product} />
+    {product.category === 'ai' && <a class="waitlist-link" href="#waitlist">Join the waitlist</a>}
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: var(--hairline) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    overflow: hidden;
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  .card:hover,
+  .card:focus-within {
+    transform: translateY(calc(-1 * var(--space-1)));
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+
+  .media img,
+  .media video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition:
+      transform var(--dur-slow) var(--ease-out),
+      opacity var(--dur-base) var(--ease-out);
+  }
+
+  .media video {
+    opacity: 0;
+  }
+
+  .media video:global(.is-playing) {
+    opacity: 1;
+  }
+
+  .card:hover .media img,
+  .card:hover .media video {
+    transform: scale(1.04);
+  }
+
+  .badge {
+    position: absolute;
+    top: var(--space-3);
+    left: var(--space-3);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--accent);
+    color: var(--accent-ink);
+    font-size: var(--text-xs);
+    font-weight: 800;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  .body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-6) var(--space-6) var(--space-4);
+  }
+
+  .category {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .name {
+    font-size: var(--text-xl);
+    line-height: var(--leading-snug);
+  }
+
+  .tagline {
+    color: var(--muted);
+  }
+
+  .bullets {
+    display: grid;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+  }
+
+  .bullets li {
+    display: flex;
+    gap: var(--space-2);
+  }
+
+  .bullets li::before {
+    content: '→';
+    color: var(--accent);
+  }
+
+  .formats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: auto;
+    padding: var(--space-2) 0 0;
+    list-style: none;
+  }
+
+  .formats li {
+    padding: var(--space-1) var(--space-3);
+    border: var(--hairline) solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .legal {
+    padding: var(--space-3);
+    border-left: var(--stroke) solid var(--glow);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+
+  .footer {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-4) var(--space-6) var(--space-6);
+  }
+
+  .waitlist-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--tap);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--accent);
+  }
+</style>

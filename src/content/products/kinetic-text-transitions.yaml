@@ -1,0 +1,18 @@
+name: Kinetic Text & Transitions
+status: live
+category: mogrt
+payhipUrl: ''
+price: null
+tagline: Punchy titles and cuts that match the beat.
+bullets:
+  - Kinetic title presets for hooks and callouts
+  - Whip, glitch and zoom transitions
+  - Edit text and colors from the Essential Graphics panel
+formats:
+  - premiere-pro
+previewVideo: null
+previewImage: /previews/kinetic-text-transitions/previewImage.svg
+previewAlt: Slanted bold text reading MOVE FAST with motion streaks
+badge: none
+legalDisclaimer: false
+order: 20

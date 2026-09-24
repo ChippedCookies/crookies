@@ -1,0 +1,19 @@
+name: Client Onboarding & Revision Tracker
+status: live
+category: template
+payhipUrl: ''
+price: null
+tagline: Every brief, feedback round and deadline in one place.
+bullets:
+  - Client intake form and project brief
+  - Revision rounds with feedback log
+  - Deadline view so nothing slips
+formats:
+  - notion
+  - google-sheets
+previewVideo: null
+previewImage: /previews/client-onboarding-tracker/previewImage.svg
+previewAlt: Project table listing clients, revision rounds, due dates and status
+badge: none
+legalDisclaimer: false
+order: 30

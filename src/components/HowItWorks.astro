@@ -1,0 +1,77 @@
+---
+const steps = [
+  { title: 'Pick your pack', text: 'Every card shows what you get and which apps it works with.' },
+  { title: 'Check out on Payhip', text: 'Pay in a secure checkout without leaving this page.' },
+  { title: 'Download and edit', text: 'Your files show up right away and land in your inbox. Drop them into your next project.' },
+];
+---
+
+<section id="how" class="section how">
+  <div class="container">
+    <header data-reveal>
+      <p class="eyebrow">How it works</p>
+      <h2 class="section-title">From cart to timeline in minutes</h2>
+    </header>
+    <ol class="steps" role="list">
+      {
+        steps.map((step, index) => (
+          <li class="step" data-reveal style={`--reveal-index: ${index}`}>
+            <span class="number" aria-hidden="true">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-text">{step.text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .how {
+    border-block: var(--hairline) solid var(--border);
+    background: linear-gradient(180deg, var(--bg), var(--surface) 50%, var(--bg));
+  }
+
+  .steps {
+    display: grid;
+    gap: var(--space-6);
+    margin-top: var(--space-8);
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 768px) {
+    .steps {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .step {
+    padding: var(--space-8) var(--space-6);
+    border: var(--hairline) solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+
+  .number {
+    display: block;
+    margin-bottom: var(--space-6);
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: var(--hairline) var(--accent);
+  }
+
+  .step-title {
+    margin-bottom: var(--space-2);
+    font-size: var(--text-xl);
+  }
+
+  .step-text {
+    color: var(--muted);
+  }
+</style>

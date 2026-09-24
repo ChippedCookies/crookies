@@ -1,0 +1,91 @@
+---
+import { site } from '../site';
+---
+
+<section id="waitlist" class="section">
+  <div class="container">
+    <div class="panel" data-reveal>
+      <p class="eyebrow">Coming next</p>
+      <h2 class="section-title">AI tools for short-form</h2>
+      <p class="section-lead">Tools that cut the boring parts of editing. Get on the list and hear about them first.</p>
+
+      {
+        site.waitlistFormAction ? (
+          <form class="form" action={site.waitlistFormAction} method="post" data-signup-form>
+            <label class="visually-hidden" for="waitlist-email">
+              Email address
+            </label>
+            <input id="waitlist-email" name="email" type="email" autocomplete="email" required placeholder="you@email.com" />
+            <button class="btn btn-primary" type="submit">
+              Join the waitlist
+            </button>
+            <p class="status" data-signup-status role="status" aria-live="polite" />
+          </form>
+        ) : (
+          <p class="soon">The waitlist opens soon.</p>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  import '../scripts/signup';
+</script>
+
+<style>
+  .panel {
+    position: relative;
+    overflow: hidden;
+    padding: var(--space-12) var(--space-6);
+    border: var(--hairline) solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    background:
+      radial-gradient(circle at 100% 0%, var(--glow-soft), transparent 60%),
+      var(--surface);
+  }
+
+  @media (min-width: 768px) {
+    .panel {
+      padding: var(--space-16);
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    max-width: 36rem;
+    margin-top: var(--space-8);
+  }
+
+  input {
+    flex: 1 1 16rem;
+    min-height: var(--tap);
+    padding: var(--space-3) var(--space-4);
+    border: var(--hairline) solid var(--border-strong);
+    border-radius: var(--radius-pill);
+    background: var(--bg);
+  }
+
+  input::placeholder {
+    color: var(--muted);
+  }
+
+  .status {
+    flex-basis: 100%;
+    min-height: 1.5em;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .form[data-state='success'] .status {
+    color: var(--accent);
+  }
+
+  .soon {
+    margin-top: var(--space-6);
+    font-weight: 700;
+    color: var(--accent);
+  }
+</style>

@@ -1,0 +1,19 @@
+name: Editor Invoice & Contract Kit
+status: live
+category: template
+payhipUrl: ''
+price: null
+tagline: Look professional and get paid for every revision.
+bullets:
+  - Invoice template with payment terms
+  - Editing services contract template
+  - Scope and revision-limit clauses
+formats:
+  - google-docs
+  - pdf
+previewVideo: null
+previewImage: /previews/editor-invoice-contract-kit/previewImage.svg
+previewAlt: Invoice document with a highlighted total
+badge: none
+legalDisclaimer: true
+order: 50

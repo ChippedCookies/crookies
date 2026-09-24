@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import type { Product } from '../lib/products';
+import { site } from '../site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  products?: Product[];
+}
+
+const { title = `${site.name} | ${site.tagline}`, description = site.description, products = [] } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og-image.png', Astro.site);
+
+const jsonLd = [
+  { '@context': 'https://schema.org', '@type': 'Organization', name: site.name, url: site.url },
+  ...products
+    .filter((product) => product.price !== null && product.payhipId)
+    .map((product) => ({
+      '@context': 'https://schema.org',
+      '@type': 'Product',
+      name: product.name,
+      description: product.tagline,
+      image: new URL(product.previewImage, Astro.site).href,
+      offers: {
+        '@type': 'Offer',
+        price: product.price,
+        priceCurrency: 'USD',
+        availability: 'https://schema.org/InStock',
+        url: `https://payhip.com/b/${product.payhipId}`,
+      },
+    })),
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0a0a0c" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <script is:inline src="https://payhip.com/payhip.js" defer></script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#shop">Skip to the shop</a>
+    <slot />
+  </body>
+</html>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: var(--space-2);
+    left: var(--space-2);
+    z-index: 200;
+    padding: var(--space-3) var(--space-4);
+    background: var(--accent);
+    color: var(--accent-ink);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+</style>

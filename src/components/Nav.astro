@@ -1,0 +1,96 @@
+---
+import { site } from '../site';
+---
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#top" aria-label={`${site.name}, back to top`}>
+      <span class="logo-mark" aria-hidden="true"></span>
+      {site.name}
+    </a>
+    <nav aria-label="Main">
+      <ul class="links" role="list">
+        <li class="link-optional"><a href="#how">How it works</a></li>
+        <li class="link-optional"><a href="#faq">FAQ</a></li>
+        <li><a class="btn btn-primary" href="#shop">Shop</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--overlay);
+    backdrop-filter: blur(var(--space-4)) saturate(1.4);
+    border-bottom: var(--hairline) solid var(--border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--nav-height);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: var(--tap);
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 800;
+    letter-spacing: var(--tracking-tight);
+    text-decoration: none;
+  }
+
+  .logo-mark {
+    width: var(--space-4);
+    height: var(--space-4);
+    border-radius: var(--radius-pill);
+    background: conic-gradient(from 0deg, var(--accent), var(--glow), var(--accent));
+    animation: spin var(--dur-ambient) linear infinite;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-sm);
+    font-weight: 600;
+  }
+
+  .links a:not(.btn) {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--tap);
+    color: var(--muted);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .links a:not(.btn):hover {
+    color: var(--text);
+  }
+
+  .link-optional {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .link-optional {
+      display: list-item;
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+</style>

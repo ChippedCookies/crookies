@@ -1,0 +1,18 @@
+name: Caption Pack Vol. 1
+status: live
+category: mogrt
+payhipUrl: ''
+price: null
+tagline: Captions that keep people watching.
+bullets:
+  - Animated word-by-word caption styles
+  - Drag, drop, type. No keyframing
+  - Built for 9:16 vertical video
+formats:
+  - premiere-pro
+previewVideo: null
+previewImage: /previews/caption-pack-vol-1/previewImage.svg
+previewAlt: Vertical phone frame with bold captions, one word highlighted in lime
+badge: new
+legalDisclaimer: false
+order: 10

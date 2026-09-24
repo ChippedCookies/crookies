@@ -1,0 +1,35 @@
+---
+import { formatPrice, type Product } from '../lib/catalog';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+const priceText = product.price === null ? null : formatPrice(product.price);
+---
+
+{
+  product.payhipId ? (
+    <a
+      class="btn btn-primary payhip-buy-button buy"
+      href={`https://payhip.com/b/${product.payhipId}`}
+      data-product={product.payhipId}
+      data-theme="none"
+      data-buy-button
+      aria-label={priceText ? `Buy ${product.name} for ${priceText}` : `Buy ${product.name}`}
+    >
+      {priceText ? `Buy · ${priceText}` : 'Buy now'}
+    </a>
+  ) : (
+    <button type="button" class="btn buy" disabled data-buy-button>
+      Coming soon
+    </button>
+  )
+}
+
+<style>
+  .buy {
+    width: 100%;
+  }
+</style>

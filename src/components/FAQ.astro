@@ -1,0 +1,125 @@
+---
+const questions = [
+  {
+    q: "What's a MOGRT?",
+    a: 'A Motion Graphics Template for Premiere Pro. Install it once, drag it onto your timeline, then change the text and colors in the Essential Graphics panel. No After Effects needed.',
+  },
+  {
+    q: 'What do I need to use these?',
+    a: 'MOGRTs need Adobe Premiere Pro. Templates work in the apps listed on each card: Notion, Google Sheets, Google Docs or PDF.',
+  },
+  {
+    q: 'How do I get my files?',
+    a: 'Right after checkout, Payhip shows your download link on screen and emails it to you. You can download again from that email any time.',
+  },
+  {
+    q: 'Can I use these in client work?',
+    a: "Yes. Use what you buy in your own videos and in videos you make for clients. Just don't resell or share the files themselves.",
+  },
+  {
+    q: 'Can I get a refund?',
+    a: "These are instant digital downloads, so sales are final. If a file is broken or isn't what the listing described, reply to your Payhip receipt and we'll make it right.",
+  },
+  {
+    q: 'Are the contract templates legal advice?',
+    a: 'No. Templates only, not legal advice. Have a lawyer review contracts before you use them, because the rules differ by country and state.',
+  },
+];
+---
+
+<section id="faq" class="section">
+  <div class="container faq">
+    <header data-reveal>
+      <p class="eyebrow">FAQ</p>
+      <h2 class="section-title">Good questions</h2>
+    </header>
+    <div class="list">
+      {
+        questions.map((item) => (
+          <details class="item" data-reveal>
+            <summary>
+              {item.q}
+              <span class="icon" aria-hidden="true" />
+            </summary>
+            <p>{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    display: grid;
+    gap: var(--space-8);
+  }
+
+  @media (min-width: 960px) {
+    .faq {
+      grid-template-columns: 1fr 1.6fr;
+    }
+  }
+
+  .list {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .item {
+    border: var(--hairline) solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+
+  .item[open] {
+    border-color: var(--border-strong);
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    min-height: var(--tap);
+    padding: var(--space-4) var(--space-6);
+    font-weight: 700;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .icon {
+    position: relative;
+    flex-shrink: 0;
+    width: var(--space-4);
+    height: var(--space-4);
+  }
+
+  .icon::before,
+  .icon::after {
+    content: '';
+    position: absolute;
+    inset: calc(50% - var(--hairline)) 0 auto;
+    height: var(--stroke);
+    background: var(--accent);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .icon::after {
+    transform: rotate(90deg);
+  }
+
+  .item[open] .icon::after {
+    transform: rotate(0deg);
+  }
+
+  .item p {
+    padding: 0 var(--space-6) var(--space-6);
+    color: var(--muted);
+  }
+</style>

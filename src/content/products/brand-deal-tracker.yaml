@@ -1,0 +1,19 @@
+name: Brand-Deal Tracker
+status: live
+category: template
+payhipUrl: ''
+price: null
+tagline: Pitch brands, track deliverables and get paid on time.
+bullets:
+  - Pitch email templates
+  - Deliverables and payment tracker
+  - Rate card layout you can send to brands
+formats:
+  - notion
+  - google-sheets
+previewVideo: null
+previewImage: /previews/brand-deal-tracker/previewImage.svg
+previewAlt: Board of brand deals sorted into pitched, negotiating and paid columns
+badge: none
+legalDisclaimer: false
+order: 40

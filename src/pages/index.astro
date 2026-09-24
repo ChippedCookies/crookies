@@ -1,0 +1,31 @@
+---
+import Catalog from '../components/Catalog.astro';
+import EmailSignup from '../components/EmailSignup.astro';
+import FAQ from '../components/FAQ.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Marquee from '../components/Marquee.astro';
+import Nav from '../components/Nav.astro';
+import Base from '../layouts/Base.astro';
+import { getProducts } from '../lib/products';
+
+const products = await getProducts();
+---
+
+<Base products={products}>
+  <Nav />
+  <main>
+    <Hero />
+    <Marquee />
+    <Catalog products={products} />
+    <HowItWorks />
+    <FAQ />
+    <EmailSignup />
+  </main>
+  <Footer />
+</Base>
+
+<script>
+  import '../scripts/reveal';
+</script>

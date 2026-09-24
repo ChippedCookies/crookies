@@ -1,0 +1,85 @@
+:root {
+  /* Color */
+  --bg: #0a0a0c;
+  --surface: #141418;
+  --surface-2: #1c1c22;
+  --surface-3: #2a2a33;
+  --border: rgb(255 255 255 / 0.08);
+  --border-strong: rgb(255 255 255 / 0.16);
+  --text: #f4f4f6;
+  --muted: #a1a1aa;
+  --accent: #c6ff3d;
+  --accent-ink: #0a0a0c;
+  --glow: #7c5cff;
+  --glow-soft: rgb(124 92 255 / 0.35);
+  --accent-soft: rgb(198 255 61 / 0.18);
+  --overlay: rgb(10 10 12 / 0.72);
+
+  /* Spacing: 4px base */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Layout */
+  --container: 1200px;
+  --gutter: var(--space-4);
+  --tap: 44px;
+  --hairline: 1px;
+  --nav-height: 64px;
+
+  /* Type */
+  --font-display: 'Unbounded Variable', 'Arial Black', system-ui, sans-serif;
+  --font-body: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  --text-3xl: clamp(2rem, 1.4rem + 3vw, 3.5rem);
+  --text-hero: clamp(2.5rem, 1rem + 5.5vw, 5.75rem);
+  --leading-tight: 1.02;
+  --leading-snug: 1.25;
+  --leading-body: 1.6;
+  --tracking-tight: -0.03em;
+  --tracking-wide: 0.12em;
+
+  /* Shape */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --shadow-glow: 0 0 0 var(--hairline) var(--border-strong), 0 20px 60px -20px var(--glow-soft);
+  --shadow-accent: 0 0 32px -4px var(--accent-soft);
+
+  /* Motion */
+  --dur-fast: 150ms;
+  --dur-base: 300ms;
+  --dur-slow: 700ms;
+  --dur-ambient: 18s;
+  --dur-marquee: 30s;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+  --reveal-distance: 32px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: var(--space-8);
+  }
+}
+
+:root {
+  --blur-blob: 90px;
+  --blob-size: 60vmax;
+  --stroke: 2px;
+  --dur-scrub: 6s;
+}
